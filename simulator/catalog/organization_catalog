@@ -1,0 +1,399 @@
+"""
+Enterprise Organization Catalog
+
+Defines organizations, industries, departments,
+projects, cost centers and user roles used
+throughout the simulator.
+"""
+
+# ==========================================================
+# Organizations
+# ==========================================================
+
+ORGANIZATIONS = [
+
+    "IBM AI Research",
+    "NVIDIA AI",
+    "AMD Research",
+    "OpenAI",
+    "Microsoft AI",
+    "Google DeepMind",
+    "Meta AI",
+    "Amazon ML",
+    "Oracle Cloud AI",
+    "Databricks",
+    "Snowflake AI",
+    "Tesla AI",
+    "Samsung Research",
+    "Intel AI",
+    "Qualcomm AI",
+    "Healthcare Analytics",
+    "Financial Intelligence",
+    "Retail Intelligence",
+    "University Research Lab",
+    "Government HPC Center"
+
+]
+
+# ==========================================================
+# Industries
+# ==========================================================
+
+INDUSTRIES = [
+
+    "Artificial Intelligence",
+    "Healthcare",
+    "Finance",
+    "Retail",
+    "Manufacturing",
+    "Education",
+    "Government",
+    "Telecommunications",
+    "Automotive",
+    "Cyber Security",
+    "Cloud Computing",
+    "Life Sciences"
+
+]
+
+# ==========================================================
+# Departments
+# ==========================================================
+
+DEPARTMENTS = [
+
+    "Research",
+
+    "Artificial Intelligence",
+
+    "Machine Learning",
+
+    "Deep Learning",
+
+    "Generative AI",
+
+    "Data Engineering",
+
+    "MLOps",
+
+    "Cloud Platform",
+
+    "Infrastructure",
+
+    "High Performance Computing",
+
+    "Cyber Security",
+
+    "DevOps",
+
+    "Analytics",
+
+    "Computer Vision",
+
+    "Natural Language Processing",
+
+    "Speech AI",
+
+    "Recommendation Systems",
+
+    "Edge AI",
+
+    "Autonomous Systems",
+
+    "Robotics"
+
+]
+
+# ==========================================================
+# Projects
+# ==========================================================
+
+PROJECTS = [
+
+    "Enterprise Chatbot",
+
+    "Customer360",
+
+    "Fraud Detection",
+
+    "Medical Imaging",
+
+    "LLM Fine-tuning",
+
+    "Vision Transformer",
+
+    "Recommendation Engine",
+
+    "Speech Recognition",
+
+    "Semantic Search",
+
+    "RAG Platform",
+
+    "AI Copilot",
+
+    "Autonomous Driving",
+
+    "Drone Analytics",
+
+    "Digital Twin",
+
+    "Predictive Maintenance",
+
+    "Industrial AI",
+
+    "Financial Forecasting",
+
+    "Supply Chain AI",
+
+    "Climate Modeling",
+
+    "Drug Discovery"
+
+]
+
+# ==========================================================
+# Cost Centers
+# ==========================================================
+
+COST_CENTERS = [
+
+    "CC1001",
+
+    "CC1002",
+
+    "CC1003",
+
+    "CC1004",
+
+    "CC1005",
+
+    "CC1006",
+
+    "CC1007",
+
+    "CC1008",
+
+    "CC1009",
+
+    "CC1010"
+
+]
+
+# ==========================================================
+# User Roles
+# ==========================================================
+
+USER_ROLES = [
+
+    "Research Scientist",
+
+    "Principal Scientist",
+
+    "ML Engineer",
+
+    "AI Engineer",
+
+    "Data Scientist",
+
+    "Data Engineer",
+
+    "Cloud Engineer",
+
+    "Platform Engineer",
+
+    "Infrastructure Engineer",
+
+    "MLOps Engineer",
+
+    "DevOps Engineer",
+
+    "HPC Administrator",
+
+    "System Administrator",
+
+    "GPU Administrator",
+
+    "Security Engineer",
+
+    "Software Engineer",
+
+    "Intern",
+
+    "Student",
+
+    "Product Manager",
+
+    "Architect"
+
+]
+
+# ==========================================================
+# Team Sizes
+# ==========================================================
+
+TEAM_SIZES = [
+
+    5,
+
+    10,
+
+    20,
+
+    30,
+
+    50,
+
+    100
+
+]
+
+# ==========================================================
+# Organization Sizes
+# ==========================================================
+
+ORGANIZATION_SIZES = {
+
+    "Startup": {
+
+        "users": (10, 50),
+
+        "clusters": (1, 2)
+
+    },
+
+    "Medium": {
+
+        "users": (50, 250),
+
+        "clusters": (2, 5)
+
+    },
+
+    "Enterprise": {
+
+        "users": (250, 1000),
+
+        "clusters": (5, 20)
+
+    }
+
+}
+
+# ==========================================================
+# User Behaviour Profiles
+# ==========================================================
+
+USER_BEHAVIOR = {
+
+    "Research Scientist": {
+
+        "jobs_per_day": (8, 20),
+
+        "preferred_workloads": [
+
+            "training",
+
+            "finetuning"
+
+        ],
+
+        "preferred_gpu": [
+
+            "H100",
+
+            "H200"
+
+        ]
+
+    },
+
+    "ML Engineer": {
+
+        "jobs_per_day": (15, 40),
+
+        "preferred_workloads": [
+
+            "training",
+
+            "inference"
+
+        ],
+
+        "preferred_gpu": [
+
+            "A100",
+
+            "L40S"
+
+        ]
+
+    },
+
+    "Data Scientist": {
+
+        "jobs_per_day": (8, 25),
+
+        "preferred_workloads": [
+
+            "embedding",
+
+            "preprocessing",
+
+            "training"
+
+        ],
+
+        "preferred_gpu": [
+
+            "A100",
+
+            "V100"
+
+        ]
+
+    },
+
+    "Platform Engineer": {
+
+        "jobs_per_day": (3, 12),
+
+        "preferred_workloads": [
+
+            "benchmark",
+
+            "evaluation"
+
+        ],
+
+        "preferred_gpu": [
+
+            "L40S",
+
+            "A100"
+
+        ]
+
+    },
+
+    "Intern": {
+
+        "jobs_per_day": (1, 8),
+
+        "preferred_workloads": [
+
+            "debug",
+
+            "inference"
+
+        ],
+
+        "preferred_gpu": [
+
+            "V100"
+
+        ]
+
+    }
+
+}

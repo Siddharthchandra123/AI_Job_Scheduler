@@ -1,0 +1,60 @@
+"""
+All supported simulation events.
+"""
+
+from enum import Enum
+
+
+class EventType(str, Enum):
+
+    # Job lifecycle
+
+    JOB_SUBMITTED = "JOB_SUBMITTED"
+
+    JOB_VALIDATED = "JOB_VALIDATED"
+
+    JOB_QUEUED = "JOB_QUEUED"
+
+    JOB_ELIGIBLE = "JOB_ELIGIBLE"
+
+    JOB_STARTED = "JOB_STARTED"
+
+    JOB_RUNNING = "JOB_RUNNING"
+
+    JOB_COMPLETED = "JOB_COMPLETED"
+
+    JOB_FAILED = "JOB_FAILED"
+
+    JOB_CANCELLED = "JOB_CANCELLED"
+
+    # Resource events
+
+    GPU_ALLOCATED = "GPU_ALLOCATED"
+
+    GPU_RELEASED = "GPU_RELEASED"
+
+    CPU_ALLOCATED = "CPU_ALLOCATED"
+
+    MEMORY_ALLOCATED = "MEMORY_ALLOCATED"
+
+    # Cluster
+
+    NODE_FAILED = "NODE_FAILED"
+
+    NODE_RECOVERED = "NODE_RECOVERED"
+
+    PARTITION_FULL = "PARTITION_FULL"
+
+    # Scheduler
+
+    SCHEDULER_TICK = "SCHEDULER_TICK"
+
+    QUEUE_UPDATED = "QUEUE_UPDATED"
+
+    # Metrics
+
+    METRICS_UPDATE = "METRICS_UPDATE"
+
+    SIMULATION_START = "SIMULATION_START"
+
+    SIMULATION_END = "SIMULATION_END"

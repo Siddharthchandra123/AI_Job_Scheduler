@@ -1,0 +1,72 @@
+simulation:
+
+  random_seed: 42
+
+  duration_days: 30
+
+  total_jobs: 1000000
+
+clusters:
+
+  count: 5
+
+  nodes_per_cluster: 120
+
+organizations:
+
+  count: 20
+
+users:
+
+  per_organization: 5
+
+partitions:
+
+  - gpu-h100
+  - gpu-h200
+  - gpu-a100
+  - gpu-l40s
+  - gpu-v100
+  - cpu
+  - debug
+  - long
+  - short
+  - inference
+  - research
+  - production
+
+gpu_catalog:
+
+  H100:
+    memory: 80
+    power: 700
+
+  H200:
+    memory: 141
+    power: 700
+
+  B200:
+    memory: 192
+    power: 1000
+
+  A100:
+    memory: 80
+    power: 400
+
+  L40S:
+    memory: 48
+    power: 350
+
+  V100:
+    memory: 32
+    power: 300
+
+qos:
+
+  LOW: 40
+
+  STANDARD: 35
+
+  PREMIUM: 20
+
+  CRITICAL: 5
