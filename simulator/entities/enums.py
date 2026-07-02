@@ -57,15 +57,23 @@ class ClusterState(str, Enum):
     OFFLINE = "OFFLINE"
 
 
-class WorkloadType(str, Enum):
-    TRAINING = "TRAINING"
-    FINETUNING = "FINETUNING"
-    INFERENCE = "INFERENCE"
-    EMBEDDING = "EMBEDDING"
-    PREPROCESSING = "PREPROCESSING"
-    EVALUATION = "EVALUATION"
-    HYPERPARAMETER_SEARCH = "HYPERPARAMETER_SEARCH"
+from enum import Enum
 
+
+class WorkloadType(Enum):
+    TRAINING = "training"
+    FINETUNING = "finetuning"
+    INFERENCE = "inference"
+    EMBEDDING = "embedding"
+    RAG = "rag"
+    PREPROCESSING = "preprocessing"
+    EVALUATION = "evaluation"
+    RLHF = "rlhf"
+
+    OPTIMIZATION = "optimization"
+    VISION = "vision"
+    SPEECH = "speech"
+    MULTIMODAL = "multimodal"
 
 class SchedulerPolicy(str, Enum):
     FCFS = "FCFS"

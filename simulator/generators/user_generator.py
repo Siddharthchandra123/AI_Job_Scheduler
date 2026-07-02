@@ -31,19 +31,17 @@ PRIORITY = [
 
 class UserGenerator(BaseGenerator):
 
-    def __init__(self, account_id: str):
+    def __init__(self):
 
         super().__init__()
 
-        self.account_id = account_id
-
-    def generate(self):
+    def generate(self,account_id):
 
         return User(
 
             user_id=str(uuid4()),
 
-            account_id=self.account_id,
+            account_id=account_id,
 
             username=f"user_{random.randint(1000,9999)}",
 

@@ -1,65 +1,108 @@
 """
-Global simulation context.
+AI Cloud Scheduler
 
-Shared across every scheduler,
-allocator and event handler.
+Global Simulation Context
+
+This object is shared by the entire simulator.
+
+It stores every runtime object required by the
+simulation engine.
 """
 
 from simulator.engine.clock import SimulationClock
 from simulator.events.event_queue import EventQueue
+
+from simulator.core.registry import Registry
+
+from scheduler.job_queue import JobQueue
 
 
 class SimulationContext:
 
     def __init__(self):
 
+        # =====================================================
+        # Core Runtime
+        # =====================================================
+
         self.clock = SimulationClock()
 
         self.event_queue = EventQueue()
 
-        # Infrastructure
-        self.clusters = []
+        self.job_queue = JobQueue()
 
-        self.accounts = []
+        self.registry = Registry()
 
-        self.users = []
+        # =====================================================
+        # Runtime State
+        # =====================================================
 
-        # Jobs
+        self.cluster_state = None
 
-        self.pending_jobs = []
+        self.scheduler = None
 
-        self.running_jobs = []
+        self.resource_manager = None
 
-        self.completed_jobs = []
-
-        self.failed_jobs = []
-
+        # =====================================================
         # Metrics
+        # =====================================================
 
         self.metrics = {}
 
-        # Scheduler
+        # =====================================================
+        # Statistics
+        # =====================================================
 
-        self.scheduler = None
+        self.total_jobs = 0
+
+        self.running_jobs = 0
+
+        self.completed_jobs = 0
+
+        self.failed_jobs = 0
+
+        self.scheduler_cycles = 0
+
+    # =========================================================
 
     def summary(self):
 
         return {
 
-            "clusters": len(self.clusters),
-
-            "accounts": len(self.accounts),
-
-            "users": len(self.users),
-
-            "pending_jobs": len(self.pending_jobs),
-
-            "running_jobs": len(self.running_jobs),
-
-            "completed_jobs": len(self.completed_jobs),
-
-            "failed_jobs": len(self.failed_jobs),
+            "clock": self.clock.now(),
 
             "events": len(self.event_queue),
 
+            "queue": self.job_queue.size(),
+
+            "jobs": self.total_jobs,
+
+            "running": self.running_jobs,
+
+            "completed": self.completed_jobs,
+
+            "failed": self.failed_jobs,
+
+            "scheduler_cycles": self.scheduler_cycles,
+
         }
+
+    # =========================================================
+
+    def reset(self):
+
+        self.event_queue.clear()
+
+        self.job_queue.clear()
+
+        self.metrics.clear()
+
+        self.total_jobs = 0
+
+        self.running_jobs = 0
+
+        self.completed_jobs = 0
+
+        self.failed_jobs = 0
+
+        self.scheduler_cycles = 0

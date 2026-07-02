@@ -1,139 +1,332 @@
 """
-Enterprise AI workload definitions.
+Enterprise AI Workload Catalog
+
+Phase-1 (Single Node HPC Scheduler)
+
+All workloads are guaranteed to fit on a
+single compute node.
+
+Cluster Limits
+--------------
+CPU    : 96 cores
+RAM    : 1024 GB
+GPU    : 8 GPUs
 """
 
-WORKLOADS = {
+WORKLOADS = [
 
-    "training": {
+    # ==========================================================
+    # LLM Fine-Tuning
+    # ==========================================================
 
-        "weight": 25,
+    {
+        "name": "LoRA Fine-Tuning",
+        "type": "finetuning",
+        "description": "Parameter-efficient LLM fine-tuning",
 
-        "gpu_range": (4, 16),
+        "runtime_min": 30,
+        "runtime_max": 240,
 
-        "runtime_hours": (2, 24),
+        "gpu_min": 1,
+        "gpu_max": 4,
 
-        "memory_gb": (128, 1024),
+        "cpu_min": 8,
+        "cpu_max": 32,
 
-        "frameworks": [
-
-            "PyTorch",
-
-            "TensorFlow"
-
-        ]
-
+        "memory_min": 64,
+        "memory_max": 256,
     },
 
-    "finetuning": {
+    {
+        "name": "Instruction Tuning",
+        "type": "finetuning",
+        "description": "Instruction dataset tuning",
 
-        "weight": 15,
+        "runtime_min": 60,
+        "runtime_max": 480,
 
-        "gpu_range": (1, 8),
+        "gpu_min": 2,
+        "gpu_max": 8,
 
-        "runtime_hours": (1, 8),
+        "cpu_min": 16,
+        "cpu_max": 64,
 
-        "memory_gb": (64, 512),
-
-        "frameworks": [
-
-            "PyTorch"
-
-        ]
-
+        "memory_min": 128,
+        "memory_max": 512,
     },
 
-    "inference": {
+    # ==========================================================
+    # Training
+    # ==========================================================
 
-        "weight": 35,
+    {
+        "name": "Medium LLM Training",
+        "type": "training",
+        "description": "Single-node transformer training",
 
-        "gpu_range": (1, 2),
+        "runtime_min": 240,
+        "runtime_max": 1440,
 
-        "runtime_hours": (1, 2),
+        "gpu_min": 4,
+        "gpu_max": 8,
 
-        "memory_gb": (8, 64),
+        "cpu_min": 32,
+        "cpu_max": 96,
 
-        "frameworks": [
-
-            "TensorRT",
-
-            "ONNX"
-
-        ]
-
+        "memory_min": 256,
+        "memory_max": 1024,
     },
 
-    "embedding": {
+    {
+        "name": "CNN Training",
+        "type": "training",
+        "description": "Computer Vision model training",
 
-        "weight": 10,
+        "runtime_min": 60,
+        "runtime_max": 720,
 
-        "gpu_range": (1, 2),
+        "gpu_min": 1,
+        "gpu_max": 4,
 
-        "runtime_hours": (1, 3),
+        "cpu_min": 8,
+        "cpu_max": 32,
 
-        "memory_gb": (16, 64),
-
-        "frameworks": [
-
-            "PyTorch"
-
-        ]
-
+        "memory_min": 64,
+        "memory_max": 256,
     },
 
-    "evaluation": {
+    {
+        "name": "Speech Model Training",
+        "type": "training",
+        "description": "Speech recognition model",
 
-        "weight": 5,
+        "runtime_min": 120,
+        "runtime_max": 720,
 
-        "gpu_range": (1, 2),
+        "gpu_min": 2,
+        "gpu_max": 4,
 
-        "runtime_hours": (1, 4),
+        "cpu_min": 16,
+        "cpu_max": 48,
 
-        "memory_gb": (16, 64),
-
-        "frameworks": [
-
-            "PyTorch"
-
-        ]
-
+        "memory_min": 64,
+        "memory_max": 256,
     },
 
-    "preprocessing": {
+    # ==========================================================
+    # Inference
+    # ==========================================================
 
-        "weight": 5,
+    {
+        "name": "Production Inference",
+        "type": "inference",
+        "description": "Online serving endpoint",
 
-        "gpu_range": (0, 1),
+        "runtime_min": 5,
+        "runtime_max": 60,
 
-        "runtime_hours": (1, 6),
+        "gpu_min": 1,
+        "gpu_max": 2,
 
-        "memory_gb": (32, 128),
+        "cpu_min": 4,
+        "cpu_max": 16,
 
-        "frameworks": [
-
-            "RAPIDS cuML",
-
-            "Scikit-Learn"
-
-        ]
-
+        "memory_min": 16,
+        "memory_max": 64,
     },
 
-    "hyperparameter_search": {
+    {
+        "name": "Batch Inference",
+        "type": "inference",
+        "description": "Offline inference jobs",
 
-        "weight": 5,
+        "runtime_min": 15,
+        "runtime_max": 180,
 
-        "gpu_range": (8, 32),
+        "gpu_min": 1,
+        "gpu_max": 4,
 
-        "runtime_hours": (12, 72),
+        "cpu_min": 8,
+        "cpu_max": 32,
 
-        "memory_gb": (512, 2048),
+        "memory_min": 32,
+        "memory_max": 128,
+    },
 
-        "frameworks": [
+    # ==========================================================
+    # Embeddings
+    # ==========================================================
 
-            "PyTorch"
+    {
+        "name": "Embedding Generation",
+        "type": "embedding",
 
-        ]
+        "description": "Sentence embedding generation",
 
+        "runtime_min": 10,
+        "runtime_max": 120,
+
+        "gpu_min": 0,
+        "gpu_max": 2,
+
+        "cpu_min": 4,
+        "cpu_max": 16,
+
+        "memory_min": 16,
+        "memory_max": 64,
+    },
+
+    # ==========================================================
+    # RAG
+    # ==========================================================
+
+    {
+        "name": "Vector Index Build",
+        "type": "rag",
+
+        "description": "Vector database indexing",
+
+        "runtime_min": 30,
+        "runtime_max": 240,
+
+        "gpu_min": 0,
+        "gpu_max": 2,
+
+        "cpu_min": 8,
+        "cpu_max": 32,
+
+        "memory_min": 32,
+        "memory_max": 128,
+    },
+
+    {
+        "name": "Document Chunking",
+        "type": "rag",
+
+        "description": "RAG preprocessing",
+
+        "runtime_min": 15,
+        "runtime_max": 120,
+
+        "gpu_min": 0,
+        "gpu_max": 1,
+
+        "cpu_min": 8,
+        "cpu_max": 32,
+
+        "memory_min": 16,
+        "memory_max": 64,
+    },
+
+    # ==========================================================
+    # Evaluation
+    # ==========================================================
+
+    {
+        "name": "Model Evaluation",
+        "type": "evaluation",
+
+        "description": "Benchmark trained checkpoints",
+
+        "runtime_min": 20,
+        "runtime_max": 120,
+
+        "gpu_min": 1,
+        "gpu_max": 2,
+
+        "cpu_min": 4,
+        "cpu_max": 16,
+
+        "memory_min": 16,
+        "memory_max": 64,
+    },
+
+    # ==========================================================
+    # RLHF
+    # ==========================================================
+
+    {
+        "name": "RLHF Training",
+        "type": "rlhf",
+
+        "description": "Preference optimization",
+
+        "runtime_min": 180,
+        "runtime_max": 960,
+
+        "gpu_min": 4,
+        "gpu_max": 8,
+
+        "cpu_min": 32,
+        "cpu_max": 96,
+
+        "memory_min": 256,
+        "memory_max": 1024,
+    },
+
+    # ==========================================================
+    # Data Engineering
+    # ==========================================================
+
+    {
+        "name": "Feature Engineering",
+        "type": "preprocessing",
+
+        "description": "Dataset feature pipeline",
+
+        "runtime_min": 20,
+        "runtime_max": 180,
+
+        "gpu_min": 0,
+        "gpu_max": 1,
+
+        "cpu_min": 8,
+        "cpu_max": 32,
+
+        "memory_min": 32,
+        "memory_max": 128,
+    },
+
+    {
+        "name": "Data Cleaning",
+        "type": "preprocessing",
+
+        "description": "Data preprocessing",
+
+        "runtime_min": 10,
+        "runtime_max": 120,
+
+        "gpu_min": 0,
+        "gpu_max": 1,
+
+        "cpu_min": 4,
+        "cpu_max": 16,
+
+        "memory_min": 16,
+        "memory_max": 64,
+    },
+
+    # ==========================================================
+    # Hyperparameter Search
+    # ==========================================================
+
+    {
+        "name": "Hyperparameter Search",
+        "type": "optimization",
+
+        "description": "Bayesian hyperparameter optimization",
+
+        "runtime_min": 60,
+        "runtime_max": 480,
+
+        "gpu_min": 1,
+        "gpu_max": 4,
+
+        "cpu_min": 16,
+        "cpu_max": 64,
+
+        "memory_min": 64,
+        "memory_max": 256,
     }
 
-}
+]

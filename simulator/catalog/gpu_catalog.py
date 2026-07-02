@@ -1,7 +1,150 @@
 """
 GPU Hardware Catalog
 """
+"""
+GPU Catalog
 
+Enterprise GPU specifications used throughout the simulator.
+"""
+
+from dataclasses import dataclass
+
+
+@dataclass(frozen=True)
+class GPUProfile:
+
+    name: str
+
+    vendor: str
+
+    architecture: str
+
+    memory_gb: int
+
+    cuda_cores: int
+
+    tensor_tflops: float
+
+    bandwidth_gbps: int
+
+    power_watts: int
+
+    max_temperature: int
+
+    nvlink: bool
+
+    generation: str
+
+
+GPU_CATALOG = {
+
+    "V100": GPUProfile(
+
+        name="NVIDIA V100",
+        vendor="NVIDIA",
+        architecture="Volta",
+        memory_gb=32,
+        cuda_cores=5120,
+        tensor_tflops=125,
+        bandwidth_gbps=900,
+        power_watts=300,
+        max_temperature=85,
+        nvlink=True,
+        generation="V100",
+    ),
+
+    "A100_40GB": GPUProfile(
+
+        name="NVIDIA A100 40GB",
+        vendor="NVIDIA",
+        architecture="Ampere",
+        memory_gb=40,
+        cuda_cores=6912,
+        tensor_tflops=312,
+        bandwidth_gbps=1555,
+        power_watts=400,
+        max_temperature=85,
+        nvlink=True,
+        generation="A100",
+    ),
+
+    "A100_80GB": GPUProfile(
+
+        name="NVIDIA A100 80GB",
+        vendor="NVIDIA",
+        architecture="Ampere",
+        memory_gb=80,
+        cuda_cores=6912,
+        tensor_tflops=312,
+        bandwidth_gbps=2039,
+        power_watts=400,
+        max_temperature=85,
+        nvlink=True,
+        generation="A100",
+    ),
+
+    "L40S": GPUProfile(
+
+        name="NVIDIA L40S",
+        vendor="NVIDIA",
+        architecture="Ada Lovelace",
+        memory_gb=48,
+        cuda_cores=18176,
+        tensor_tflops=733,
+        bandwidth_gbps=864,
+        power_watts=350,
+        max_temperature=88,
+        nvlink=False,
+        generation="L40S",
+    ),
+
+    "H100": GPUProfile(
+
+        name="NVIDIA H100 SXM",
+        vendor="NVIDIA",
+        architecture="Hopper",
+        memory_gb=80,
+        cuda_cores=16896,
+        tensor_tflops=989,
+        bandwidth_gbps=3350,
+        power_watts=700,
+        max_temperature=90,
+        nvlink=True,
+        generation="H100",
+    ),
+
+    "H200": GPUProfile(
+
+        name="NVIDIA H200",
+        vendor="NVIDIA",
+        architecture="Hopper",
+        memory_gb=141,
+        cuda_cores=16896,
+        tensor_tflops=989,
+        bandwidth_gbps=4800,
+        power_watts=700,
+        max_temperature=90,
+        nvlink=True,
+        generation="H200",
+    ),
+
+    "B200": GPUProfile(
+
+        name="NVIDIA B200",
+        vendor="NVIDIA",
+        architecture="Blackwell",
+        memory_gb=192,
+        cuda_cores=24576,
+        tensor_tflops=4500,
+        bandwidth_gbps=8000,
+        power_watts=1000,
+        max_temperature=95,
+        nvlink=True,
+        generation="Blackwell",
+    ),
+}
+
+GPU_TYPES = list(GPU_CATALOG.keys())
 GPU_CATALOG = {
 
     "V100": {

@@ -1,20 +1,31 @@
 from dataclasses import dataclass, field
 from datetime import datetime
+from itertools import count
 from uuid import uuid4
-
 from simulator.events.event_types import EventType
+
+_counter = count()
 
 
 @dataclass(order=True)
 class Event:
 
+    # Used for heap ordering
     timestamp: datetime
 
-    event_type: EventType
+    # Required field
+    event_type: EventType = field(compare=False)
 
-    priority: int = 0
+    # Tie-breaker for same timestamp
+    sequence: int = field(
+        default_factory=lambda: next(_counter)
+    )
 
-    payload: dict = field(default_factory=dict)
+    # Event data
+    payload: dict = field(
+        default_factory=dict,
+        compare=False
+    )
 
     event_id: str = field(default_factory=lambda: str(uuid4()))
 
@@ -31,3 +42,5 @@ class Event:
             f"{self.event_type.value} "
             f"{self.timestamp}>"
         )
+
+

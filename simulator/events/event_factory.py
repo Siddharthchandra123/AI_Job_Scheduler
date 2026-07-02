@@ -8,21 +8,13 @@ class EventFactory:
 
     @staticmethod
     def create(
-
         event_type: EventType,
-
         timestamp: datetime,
-
-        **payload
-
+        payload=None,
     ):
 
         return Event(
-
             timestamp=timestamp,
-
             event_type=event_type,
-
-            payload=payload
-
+            payload=payload or {},
         )

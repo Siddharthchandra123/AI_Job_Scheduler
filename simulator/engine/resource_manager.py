@@ -1,60 +1,120 @@
 """
-Keeps track of cluster resources.
+Enterprise Resource Manager
+
+Responsible for allocating and releasing
+cluster resources.
 """
 
-from simulator.entities.cluster import Cluster
+from platform import node
+
+from simulator.state.cluster_state import ClusterState
+from simulator.entities.job import Job
 
 
 class ResourceManager:
 
-    def __init__(self):
+    def __init__(self, cluster_state: ClusterState):
 
-        self.clusters: list[Cluster] = []
+        self.cluster_state = cluster_state
 
-    def add_cluster(self, cluster: Cluster):
+    # ----------------------------------------------------
+    # Find Suitable Node
+    # ----------------------------------------------------
 
-        self.clusters.append(cluster)
+    def find_node(self, job):
 
-    def total_nodes(self):
+        print(f"\nSearching node for {job.job_id}")
 
-        return sum(len(c.nodes) for c in self.clusters)
+        print(
+            f"Needs CPU={job.requested_cpu_cores}, "
+            f"RAM={job.requested_memory_gb}, "
+            f"GPU={job.requested_gpus}, "
+            f"Partition={job.partition}"
+        )
 
-    def total_gpus(self):
+        for node in self.cluster_state.nodes.values():
 
-        total = 0
+            print(
+                f"Node {node.node_id}: "
+                f"CPU={node.available_cpu}, "
+                f"RAM={node.available_ram}, "
+                f"GPU={node.available_gpu}"
+            )
 
-        for cluster in self.clusters:
+            if (
+                node.available_cpu >= job.requested_cpu_cores
+                and node.available_ram >= job.requested_memory_gb
+                and node.available_gpu >= job.requested_gpus
+            ):
+                return node
 
-            for node in cluster.nodes:
+        return None
 
-                total += node.gpu_count
+    # ----------------------------------------------------
+    # Allocate Resources
+    # ----------------------------------------------------
 
-        return total
+    def allocate(self, job: Job):
 
-    def available_nodes(self):
+        node = self.find_node(job)
 
-        available = []
+        if node is None:
+            return False
 
-        for cluster in self.clusters:
+        node.allocated_cpu += job.requested_cpu_cores
 
-            for node in cluster.nodes:
+        node.allocated_ram += job.requested_memory_gb
 
-                if node.state == "IDLE":
+        node.allocated_gpu += job.requested_gpus
 
-                    available.append(node)
+        node.running_jobs.append(job.job_id)
 
-        return available
+        if node.available_gpu == 0:
+            node.state = "BUSY"
+        else:
+            node.state = "ALLOCATED"
+
+        job.selected_node = node.node_id
+
+        return True
+
+    # ----------------------------------------------------
+    # Release Resources
+    # ----------------------------------------------------
+
+    def release(self, job: Job):
+
+        node = self.cluster_state.nodes.get(job.selected_node)
+
+        if node is None:
+            return
+
+        node.allocated_cpu -= job.requested_cpu_cores
+
+        node.allocated_ram -= job.requested_memory_gb
+
+        node.allocated_gpu -= job.requested_gpus
+
+        if job.job_id in node.running_jobs:
+            node.running_jobs.remove(job.job_id)
+
+        if node.allocated_gpu == 0:
+            node.state = "IDLE"
+
+    # ----------------------------------------------------
+    # Cluster Summary
+    # ----------------------------------------------------
 
     def summary(self):
 
         return {
 
-            "clusters": len(self.clusters),
+            "available_gpu": self.cluster_state.total_available_gpu,
 
-            "nodes": self.total_nodes(),
+            "available_cpu": self.cluster_state.total_available_cpu,
 
-            "gpus": self.total_gpus(),
+            "running_jobs": self.cluster_state.running_jobs,
 
-            "idle_nodes": len(self.available_nodes())
+            "queued_jobs": self.cluster_state.queued_jobs,
 
         }
