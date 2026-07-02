@@ -1,639 +1,470 @@
-# AI Cloud Scheduler
+# 🚀 AI Cloud Scheduler Simulator
 
-### Enterprise AI-Powered Cloud & HPC Scheduler Simulator
+> Enterprise-grade AI/HPC Cluster Simulator for Intelligent GPU Scheduling
 
-**Author:** Siddharth Chandra
+![Python](https://img.shields.io/badge/Python-3.12-blue)
+![Status](https://img.shields.io/badge/Status-Phase%201%20Complete-success)
+![Architecture](https://img.shields.io/badge/Architecture-Event--Driven-orange)
+![License](https://img.shields.io/badge/License-MIT-green)
 
 ---
 
 # Overview
 
-AI Cloud Scheduler is an enterprise-scale **Digital Twin** of an AI/HPC cloud environment capable of simulating millions of scheduling events for modern AI workloads.
-
-The simulator models organizations, users, AI jobs, GPU clusters, compute nodes, and scheduling behavior. It is designed to generate realistic datasets for:
-
-* Supervised Learning
-* Reinforcement Learning
-* Scheduling Research
-* GPU Resource Optimization
-* Kubernetes Scheduling
-* NVIDIA GPU Infrastructure
-* HPC Cluster Simulation
-
-The long-term objective is to replace traditional scheduling algorithms with AI-driven scheduling policies capable of minimizing queue time, maximizing GPU utilization, reducing energy consumption, and improving overall cluster efficiency.
-
----
-
-# Current Project Status
-
-## Phase 1 — Foundation ✅ (Completed)
-
-The foundational layer of the simulator has been implemented and successfully tested.
-
-Completed modules include:
-
-* Configuration Management
-* Hardware Catalogs
-* Organization Catalogs
-* Domain Entities
-* Synthetic Infrastructure Generators
-* Initial Testing Pipeline
-
----
-
-# Project Architecture
-
-```
-AICloudScheduler
-│
-├── simulator
-│   ├── catalog
-│   ├── config
-│   ├── entities
-│   ├── generators
-│   ├── engine
-│   ├── events
-│   ├── tests
-│   └── datasets
-│
-├── scheduler
-├── backend
-├── ai
-├── frontend
-├── monitoring
-├── kubernetes
-└── docs
-```
-
----
-
-# Completed Modules
-
-## Configuration
-
-Implemented:
-
-```
-simulation.yaml
-
-loader.py
-```
-
-Provides:
-
-* Simulation configuration
-* Cluster size
-* Number of jobs
-* Random seed
-* Hardware configuration
-* Dataset configuration
-
----
-
-## Catalogs
-
-Implemented enterprise catalogs for synthetic data generation.
-
-### GPU Catalog
-
-Supports
-
-* NVIDIA V100
-* NVIDIA A100
-* NVIDIA H100
-* NVIDIA H200
-* NVIDIA B200
-* NVIDIA L40S
-
-Each GPU stores
-
-* Memory
-* CUDA Version
-* Power
-* TFLOPS
-* Failure Rate
-* Hourly Cost
-
----
-
-### Organization Catalog
-
-Includes
-
-* Organizations
-* Departments
-* Industries
-* Projects
-* Cost Centers
-* User Roles
-* Organization Sizes
-* User Behaviour Profiles
-
----
-
-### Workload Catalog
-
-Supports
-
-* Training
-* Fine-tuning
-* Inference
-* Embedding
-* Evaluation
-* Hyperparameter Search
-* Preprocessing
-
----
-
-### Model Catalog
-
-Supports enterprise AI models
-
-Examples
-
-* Llama 3
-* DeepSeek
-* Gemma
-* Qwen
-* Mixtral
-* Stable Diffusion
-* Whisper
-* CLIP
-
-Each model stores
-
-* Parameter Count
-* GPU Requirement
-* Runtime
-* Framework
-* Memory Requirement
-
----
-
-### Dataset Catalog
-
-Supports
-
-* ImageNet
-* COCO
-* LAION-5B
-* Common Crawl
-* FineWeb
-* PubMed
-* C4
-* Enterprise Customer360
-
----
-
-### Software Catalog
-
-Stores
-
-* CUDA
-* cuDNN
-* NCCL
-* TensorRT
-* PyTorch
-* TensorFlow
-* Ray
-* Morpheus
-
----
-
-# Domain Entities
-
-Implemented
-
-```
-Account
-
-User
-
-GPU
-
-Node
-
-Partition
-
-Cluster
-
-Job
-
-Workload
-
-Enums
-```
-
-These entities represent the digital twin of a production cloud environment.
-
----
-
-# Enterprise Job Entity
-
-The Job object models an enterprise AI workload.
-
-It currently contains fields representing
-
-### Metadata
-
-* Job ID
-* Job Name
-* Comment
-
-### Ownership
-
-* Account
-* User
-* Department
-* Region
-* Project
-* Cost Center
-
-### Scheduling
-
-* QoS
-* Priority
-* Scheduler
-* Partition
-* Queue Position
-
-### Resources
-
-* CPU
-* GPU
-* Memory
-* Storage
-* Network
-
-### Runtime
-
-* Execution Time
-* Wait Time
-* CPU Time
-* Elapsed Time
-* Core Hours
-* Time To Result
-
-### AI
-
-* Predicted Runtime
-* Predicted Wait
-* Reward
-* Scheduler Score
-
-### Sustainability
-
-* GPU Energy
-* Carbon Emission
-
----
-
-# Synthetic Generators
-
-Implemented
-
-```
-BaseGenerator
-
-GPUGenerator
-
-NodeGenerator
-
-PartitionGenerator
-
-ClusterGenerator
-
-AccountGenerator
-
-UserGenerator
-```
-
-These generators create realistic synthetic infrastructure.
-
----
-
-# Infrastructure Pipeline
-
-```
-GPU Catalog
-
-↓
-
-GPU Generator
-
-↓
-
-Node Generator
-
-↓
-
-Partition Generator
-
-↓
-
-Cluster Generator
-
-↓
-
-Organization Generator
-
-↓
-
-User Generator
-```
-
----
-
-# Event Driven Simulation
-
-Current progress
-
-```
-event.py
-
-event_queue.py
-
-event_factory.py
-
-event_types.py
-```
-
-Implemented
-
-* Event object
-* Priority Queue
-* Event Factory
-* Event Types
-
-Events supported
-
-```
-JOB_SUBMITTED
-
-JOB_STARTED
-
-JOB_COMPLETED
-
-GPU_ALLOCATED
-
-GPU_RELEASED
-
-NODE_FAILED
-
-NODE_RECOVERED
-
-SIMULATION_START
-
-SIMULATION_END
-
-SCHEDULER_TICK
-```
-
----
-
-# Simulation Engine
-
-Initial engine implemented
-
-Modules
-
-```
-SimulationClock
-
-SimulationContext
-
-Dispatcher
-
-Allocator
-
-ResourceManager
-
-SimulationEngine
-```
-
-Current capability
-
-* Virtual Clock
-* Priority Event Queue
-* Event Dispatching
-* Resource Allocation
-* Simulation Loop
-
----
-
-# Unit Tests
-
-Successfully completed
-
-```
-Account Generator
-
-User Generator
-
-GPU Generator
-
-Node Generator
-
-Job Entity
-
-Foundation Pipeline
-```
-
----
-
-# Current Workflow
-
-```
-Configuration
-      │
-      ▼
-Catalogs
-      │
-      ▼
-Entities
-      │
-      ▼
-Generators
-      │
-      ▼
-Simulation Context
-      │
-      ▼
-Event Queue
-      │
-      ▼
-Simulation Engine
-```
-
----
-
-# Technologies Used
-
-## Programming
-
-* Python 3.12
-
----
-
-## AI
-
-* PyTorch
-* XGBoost
-* Stable-Baselines3 (Planned)
-
----
-
-## Data
-
-* PostgreSQL
-* Parquet
-* Pandas
-
----
-
-## Streaming
-
-* Apache Kafka
-* NVIDIA Morpheus (Planned)
-
----
-
-## Infrastructure
-
-* Kubernetes
-* Kueue
-* NVIDIA GPU Operator
-
----
-
-## Monitoring
-
-* Prometheus
-* Grafana
-* NVIDIA DCGM
-
----
-
-# Upcoming Milestones
-
-## Phase 2
-
-Discrete Event Simulation
-
-* Complete Event Dispatcher
-* Resource Allocation Engine
-* Scheduler Integration
-* Simulation State Manager
-
----
-
-## Phase 3
-
-Scheduling Algorithms
-
-* FCFS
-* Round Robin
-* Least Loaded
-* Priority Scheduler
-* Best Fit
-
----
-
-## Phase 4
-
-Synthetic Dataset Generation
-
-Generate
-
-* 1 Million Jobs
-* 20 Organizations
-* 100 Users
-* Multiple Clusters
-* Enterprise Scheduling Logs
-
----
-
-## Phase 5
-
-Supervised Learning
-
-Train models for
-
-* Node Selection
-* Runtime Prediction
-* Queue Prediction
-* Resource Recommendation
-
----
-
-## Phase 6
-
-Reinforcement Learning
-
-Develop an intelligent scheduler using
-
-* PPO
-* DQN
-* A2C
-
-Reward optimization based on
-
-* GPU Utilization
-* Queue Time
-* Energy Consumption
-* SLA Compliance
-
----
-
-## Phase 7
-
-Enterprise Deployment
-
-Integrate with
-
-* Apache Kafka
-* NVIDIA Morpheus
-* PostgreSQL
-* Kubernetes
-* NVIDIA Triton
-* Kueue
-* Prometheus
-* Grafana
-
----
-
-# Long-Term Vision
-
-Develop a production-grade **AI-powered cloud scheduling platform** capable of:
-
-* Simulating millions of enterprise AI jobs.
-* Training AI models for intelligent scheduling decisions.
-* Integrating with Kubernetes and NVIDIA GPU infrastructure.
-* Optimizing GPU utilization, queue time, energy efficiency, and SLA compliance.
-* Serving as a research and benchmarking platform for next-generation AI/HPC scheduling.
+AI Cloud Scheduler is an enterprise-scale event-driven HPC simulation platform designed to generate realistic scheduling workloads for AI, ML, LLM, RAG and HPC environments.
+
+Unlike a traditional scheduler, this project is designed to become a complete research platform capable of:
+
+- Simulating AI clusters
+- Generating millions of synthetic scheduling events
+- Training ML-based scheduling models
+- Supporting Reinforcement Learning schedulers
+- Powering future Agentic AI scheduling systems
 
 ---
 
 # Current Progress
 
-| Module                 | Status         |
-| ---------------------- | -------------- |
-| Configuration          | ✅ Complete     |
-| Catalogs               | ✅ Complete     |
-| Domain Entities        | ✅ Complete     |
-| Generators             | ✅ Complete     |
-| Foundation Tests       | ✅ Complete     |
-| Event System           | 🟡 In Progress |
-| Simulation Engine      | 🟡 In Progress |
-| Scheduling Algorithms  | ⏳ Planned      |
-| Dataset Generation     | ⏳ Planned      |
-| AI Training            | ⏳ Planned      |
-| Reinforcement Learning | ⏳ Planned      |
-| Kafka Integration      | ⏳ Planned      |
-| NVIDIA Morpheus        | ⏳ Planned      |
-| Kubernetes Integration | ⏳ Planned      |
-| Enterprise Dashboard   | ⏳ Planned      |
+## ✅ Phase 1 — Simulation Core (Completed)
+
+### Infrastructure
+
+- Account Generator
+- User Generator
+- GPU Generator
+- Node Generator
+- Cluster Generator
+- Job Generator
+
+### Enterprise Entities
+
+- Account
+- User
+- GPU
+- Node
+- Cluster
+- Job
+
+### Event Engine
+
+- Event Queue (Priority Queue)
+- Event Dispatcher
+- Event Factory
+- Event Types
+- Simulation Clock
+
+### Simulation Engine
+
+- Simulation Context
+- Simulation Builder
+- Simulation Runner
+- Event Processing Loop
+
+### Scheduling
+
+- FCFS Scheduler
+- Scheduler Manager
+- Resource Manager
+
+### Cluster
+
+- Cluster State Builder
+- Dynamic Resource Allocation
+- Resource Release
+- Runtime State Tracking
 
 ---
 
-**Current Status:** **Phase 1 Complete ✅ | Phase 2 (Discrete Event Simulation Engine) In Progress 🚧**
+# Current Architecture
+
+```
+                    Job Generator
+                          │
+                          ▼
+                  Event Queue (Heap)
+                          │
+                          ▼
+                 Simulation Engine
+                          │
+                Event Dispatcher
+                          │
+     ┌──────────────┬──────────────┐
+     ▼              ▼              ▼
+ Job Submitted  Job Started  Job Completed
+        │            │             │
+        └────────────┴─────────────┘
+                     │
+                     ▼
+             Scheduler Manager
+                     │
+                     ▼
+              FCFS Scheduler
+                     │
+                     ▼
+             Resource Manager
+                     │
+                     ▼
+               Cluster State
+                     │
+                     ▼
+                 Compute Nodes
+```
+
+---
+
+# Event Lifecycle
+
+Every job follows the complete enterprise lifecycle.
+
+```
+Job Generated
+      │
+      ▼
+JOB_SUBMITTED
+      │
+      ▼
+Scheduler Tick
+      │
+      ▼
+Resource Allocation
+      │
+      ▼
+JOB_STARTED
+      │
+      ▼
+Runtime Simulation
+      │
+      ▼
+JOB_COMPLETED
+      │
+      ▼
+Resource Release
+      │
+      ▼
+Scheduler Tick
+      │
+      ▼
+Next Job
+```
+
+---
+
+# Current Features
+
+## Enterprise Job Model
+
+Each generated job includes
+
+- Owner
+- Organization
+- Department
+- Region
+- Workload Type
+- Framework
+- Model Name
+- Dataset
+- Resource Requirements
+- Runtime
+- Priority
+- QoS
+- Scheduler Policy
+- GPU Metrics
+- CPU Metrics
+- Energy Metrics
+- Carbon Metrics
+
+---
+
+## AI Workloads
+
+Supported workload categories
+
+- LLM Training
+- LoRA Fine-tuning
+- Instruction Tuning
+- CNN Training
+- Speech Training
+- Production Inference
+- Batch Inference
+- Embedding Generation
+- RAG Index Build
+- Document Processing
+- RLHF Training
+- Hyperparameter Optimization
+- Data Engineering
+- Model Evaluation
+
+---
+
+## Cluster Simulation
+
+Supports simulation of
+
+- Multiple Nodes
+- CPUs
+- RAM
+- GPUs
+- Partitions
+- Resource Allocation
+- Resource Release
+- Cluster State Updates
+
+---
+
+# Project Structure
+
+```
+AICloudScheduler/
+
+│
+├── simulator/
+│
+├── builders/
+├── catalog/
+├── engine/
+├── entities/
+├── events/
+├── generators/
+├── handlers/
+├── runner/
+├── state/
+├── tests/
+│
+├── scheduler/
+│
+├── fcfs_scheduler.py
+├── scheduler_manager.py
+│
+└── run.py
+```
+
+---
+
+# Technologies
+
+- Python 3.12
+- Dataclasses
+- Event Driven Architecture
+- Priority Queue (heapq)
+- Object Oriented Design
+- Enterprise Simulation Patterns
+
+---
+
+# Example Simulation
+
+```
+Initializing Simulation Engine...
+
+Simulation Engine Ready.
+
+Starting Simulation...
+
+Job Submitted
+
+↓
+
+Scheduler Tick
+
+↓
+
+Job Scheduled
+
+↓
+
+Job Started
+
+↓
+
+Job Completed
+
+↓
+
+Resources Released
+
+↓
+
+Simulation Completed
+```
+
+---
+
+# Phase 1 Achievements
+
+✅ Event Driven Architecture
+
+✅ Dynamic Resource Allocation
+
+✅ Resource Release
+
+✅ Cluster State Tracking
+
+✅ Enterprise Job Model
+
+✅ Job Generator
+
+✅ Event Queue
+
+✅ Dispatcher
+
+✅ Simulation Engine
+
+✅ FCFS Scheduler
+
+---
+
+# Roadmap
+
+## Phase 2 — Analytics Engine
+
+Planned modules
+
+```
+analytics/
+
+metrics.py
+
+collector.py
+
+statistics.py
+
+reward.py
+
+feature_extractor.py
+
+dataset_builder.py
+
+exporter.py
+```
+
+Features
+
+- Queue Metrics
+- GPU Utilization
+- CPU Utilization
+- Cluster Utilization
+- Throughput
+- Waiting Time
+- Turnaround Time
+- Energy Consumption
+- Carbon Emissions
+
+---
+
+## Phase 3 — Dataset Generation
+
+Generate datasets for
+
+- Random Forest
+- XGBoost
+- LightGBM
+- CatBoost
+- Deep Learning
+- Reinforcement Learning
+
+Export formats
+
+- CSV
+- Parquet
+- JSON
+
+---
+
+## Phase 4 — Intelligent Scheduling
+
+Schedulers to implement
+
+- Shortest Job First
+- Priority Scheduler
+- Backfilling
+- Dominant Resource Fairness (DRF)
+- Fair Share Scheduler
+- AI Scheduler
+
+---
+
+## Phase 5 — Machine Learning Scheduler
+
+Train models using simulator-generated datasets.
+
+Models
+
+- Random Forest
+- XGBoost
+- LightGBM
+- Transformer
+- Graph Neural Networks
+- PPO
+- Deep Reinforcement Learning
+
+---
+
+## Phase 6 — Agentic AI Scheduler
+
+Future capabilities
+
+- LLM Scheduler
+- Multi-Agent Scheduling
+- Autonomous Cluster Management
+- Predictive Resource Allocation
+- Self-Healing Scheduling
+- Explainable Scheduling Decisions
+
+---
+
+# Long-Term Vision
+
+```
+Synthetic Job Generator
+        │
+        ▼
+Event Driven HPC Simulator
+        │
+        ▼
+Metrics Collection
+        │
+        ▼
+Feature Engineering
+        │
+        ▼
+Training Dataset
+        │
+        ▼
+Machine Learning Models
+        │
+        ▼
+AI Scheduler
+        │
+        ▼
+Agentic AI Cluster Manager
+```
+
+---
+
+# Current Status
+
+| Component | Status |
+|-----------|--------|
+| Entity Layer | ✅ Complete |
+| Generator Layer | ✅ Complete |
+| Event Engine | ✅ Complete |
+| Scheduler | ✅ FCFS Complete |
+| Resource Manager | ✅ Complete |
+| Simulation Engine | ✅ Complete |
+| Cluster State | ✅ Complete |
+| Analytics | 🚧 Next Phase |
+| Dataset Generation | 🚧 Planned |
+| AI Scheduler | 🚧 Planned |
+| RL Scheduler | 🚧 Planned |
+| Agentic AI | 🚧 Planned |
+
+---
+
+# Author
+
+**Siddharth Chandra**
+
+AI/ML Engineer | HPC | Distributed Systems | LLM | Agentic AI | GPU Scheduling
+
+GitHub:
+https://github.com/Siddharthchandra123
